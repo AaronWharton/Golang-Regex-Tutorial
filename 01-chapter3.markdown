@@ -1,9 +1,9 @@
-# Part 3: Cookbook #
+# 第三部分：示例 Cookbook #
 
 ## grep ##
 
-The grep-tool searches for (regular) expressions in text files. Every single line is read and if the line matches the pattern provided on the command line, that line is printed.
-	 	
+这个 grep 工具用来在文本文件中搜索匹配一个正则表达式。读取到的每行文本都会和命令行中给定的正则进行匹配，匹配到的行会被打印出来。
+
 	package main
 
 	import (
@@ -51,14 +51,13 @@ The grep-tool searches for (regular) expressions in text files. Every single lin
 		}
 	}
 	 	
-If you don't know what grep does, search 'man grep'.
+如果你不知道 grep 为何物，可以在命令行里运行 'man grep' 一下。
 
+## 搜索替换 ##
 
-## Search and Replace ##
+这个工具是上面 grep 工具的升级版。它在搜索匹配一个模式的同时会用其它内容替换掉匹配到的内容。显然我们是在对上面已有的 grep 版本基础上进行一些二次加工。
 
-This tool is an improved version of grep. It does not only search for a pattern, but also replaces the pattern with something else. We will obviously want to build on the existing grep solution.
-
-Usage: ./replacer old new filename
+用法： ./replacer old new filename
 
 	 	
 	package main
@@ -107,20 +106,11 @@ Usage: ./replacer old new filename
 		}
 	}
 	 	
-## Verifying an email-address ##
+## 验证电子邮件地址 ##
 
-Interestingly the RFC 2822 which defines the format of email-addresses is pretty permissive.
-That makes it hard to come up with a simple regular expression that matches a valid
-email address. In most cases though your 
-application can make some assumptions about addresses and I found this one sufficient for
-all practical purposes:
+RFC2822 对于电子邮件的格式定义的过于宽松，以至于很难用简单的正则表达式验证一个邮件地址是否合规。很有趣啊。大多数情况下尽管你的程序会对邮件地址做一些预设，但是我发现下面这条正则对所有的情况都是实地有效的：
 
 	(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})
 
-It must start with a character of the \w class. Then we can have any number of characters 
-including the hyphen, the '.' and the underscore. We want the last character before the @ to 
-be a 'regular' character again. We repeat the same pattern for the domain, only that the 
-suffix (part behind the last dot) can be only 2 or 3 characters. This will cover most cases. 
-If you come across an email address that does not match this regexp it has probably deliberately 
-been setup to annoy you and you can therefore ignore it.
+邮件地址必须以一个字符 \w 开头，接下来是任何数量的包含了破折号、英文句点以及下划线在内的字符。同时，在 @ 之前的最后一个字符必须又是一个“正常的”字符才行。对于域名部分我们也是同样的规则，但域名的后缀部分必须只由2到3个字符组成。这个规则基本可以覆盖大多数的情况。如果你碰到一个和这个正则不匹配的邮件地址，那很可能是故意拼凑起来逗你玩儿的，忽略即可。
 

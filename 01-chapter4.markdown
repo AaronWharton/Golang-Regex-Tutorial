@@ -1,8 +1,8 @@
-# Part 4: Alternatives #
+# 第四部分：换个思路 #
 
-## Splitting up a line into tokens ##
+## 把一句话分词 ##
 
-If literal strings separate the fields in your input you don't need to use regexps.
+如果输入部分字面量是字符串，你则不必使用正则。
 	 	
 		s := "abc,def,ghi"
 		r, err := regexp.Compile(`[^,]+`) // everything that is not a comma
@@ -11,32 +11,17 @@ If literal strings separate the fields in your input you don't need to use regex
 		fmt.Printf("%v", res)
 	 	
 
-The *Split*-function in the *strings*-package serves the same purpose and the syntax is more readable
-
+*strings* 包里面的 *Split* 函数就是用来做这个的，而且语法更可读。
 	 	
 		s := "abc,def,ghi"
 		res:= strings.Split(s, ",")
 		// Prints [abc def ghi] 
 		fmt.Printf("%v", res)
 	 	
-As a convenience the Standard library also provides the *Fields* function in the strings-package,
-that splits a string at white space:
 
-		fmt.Printf("Fields are: %q", strings.Fields("  Frodo Thorin  Dwalin   "))
+## 验证在一个字符串里是否存在一个指定的子字符串 ##
 
-yields:
-
-		Fields are: ["Frodo" "Thorin" "Dwalin"]
-		
-You can even provide a more sophisticated function the variant *FieldsFunc*. It takes
-your string and a function as parameter. The function must accept a rune as a parameter.
-
-FIXME Example missing
-
-
-## Testing if a specific substring exists in your string ##
-
-The *MatchString*-function allows you to find a literal string in another string.
+使用 *MatchString* 函数可以在一个字符串里查找另一个字面量的字符串。
 
 	 	
 		s := "OttoFritzHermanWaldoKarlSiegfried"
@@ -46,7 +31,7 @@ The *MatchString*-function allows you to find a literal string in another string
 		fmt.Printf("%v", res)
 	 	
 
-But you can avoid the regexp if you use the *strings.Index*-function to retrieve the index of your substring in the string. Index returns -1 if the substring is not present. 
+但是使用 *strings.Index* 函数可以在字串中获取匹配到子串的索引。当不匹配时则返回的索引为-1。
 
 	 	
 		s := "OttoFritzHermanWaldoKarlSiegfried"
@@ -55,12 +40,11 @@ But you can avoid the regexp if you use the *strings.Index*-function to retrieve
 		fmt.Printf("%v", res != -1)
 	 	
 
-## Removing Spaces
+## 删除空格
 
-Whenever you are reading text from a file or from the user you probably want to discard spaces at the beginnning and at the end of the line.
+每当你读一些来自文件或是用户的文本时，你可能都想忽略那些句子开头和末尾的空格。
 
-You could use regexps to accomplish that:
-
+你可以用正则来搞定：
 	 	
 		s := "  Institute of Experimental Computer Science  "
 		r, err := regexp.Compile(`\s*(.*)\s*`)
@@ -68,13 +52,11 @@ You could use regexps to accomplish that:
 		// <Institute of Experimental Computer Science  >
 		fmt.Printf("<%v>", res[1])
 	 	
-
-The first attempt to remove the spaces failed - only the spaces at the head of the string have been removed, the next piece .* was greedy and captured the rest - but I don't bother to figure out the correct regexp for this task, because I know *strings.TrimSpace*.
-
+首次移除空格大作战以失败告终。只有字符串开头前面的空格被删除了，接下来的 .* 这个片段是贪婪匹配，所以它会捕获余下的全部内容。但是对于这样的任务我不想继续折腾正则了，因为我知道还有 *strings.TrimSpace* 这个东东。
 	 	
 		s := "  Institute of Experimental Computer Science  "
 		// <Institute of Experimental Computer Science>
 		fmt.Printf("<%v>", strings.TrimSpace(s))
 	 	
 
-TrimSpace removes the spaces at the beginning and the end; lookup the documentation of the strings package, there are a few more functions in the Trim-family.
+TrimSpace 删除了开头和结尾的空格。翻阅 *strings* 包的文档会发现 Trim 家族还有其它一些函数。 
