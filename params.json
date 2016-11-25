@@ -1,0 +1,6 @@
+{
+  "name": "Golang-regex-tutorial",
+  "tagline": "Golang - Regular Expression Tutorial",
+  "body": "Golang-Regex-Tutorial\r\n=====================\r\n\r\nGolang - Regular Expression Tutorial\r\n\r\nThis is a regular expression tutorial for Go, the language.\r\n\r\n- [Introduction](01-chapter0.markdown)\r\n- [Part 1: The basics](01-chapter1.markdown)\r\n- [Part 2: Advanced](01-chapter2.markdown)\r\n- [Part 3: Cookbook](01-chapter3.markdown)\r\n- [Part 4: Alternatives](01-chapter4.markdown)\r\n\r\nGo to http://www.golang.org for more information about Go.\r\n\r\n\r\nThis work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License.\r\n\r\nI am planning to setup gh-pages: http://stefanschroeder.github.io/Golang-Regex-Tutorial/\r\n\r\n[A Chinese version translated](zh/) by [B1nj0y](https://github.com/gingerhot).\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
