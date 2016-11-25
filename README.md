@@ -8,6 +8,5 @@ Golang 正则表达式教程
 
 本著作基于 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 许可证。
 
-
 中文翻译：[B1nj0y](https://github.com/gingerhot)
 
